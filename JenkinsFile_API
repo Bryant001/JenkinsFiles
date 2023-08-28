@@ -8,6 +8,7 @@ pipeline {
 					script { 
 						try {
 						sh """
+						pip install veracode_api_signing requests
 						python --version
 						python ./example.py
 						"""
