@@ -4,7 +4,7 @@ pipeline {
         //withCredentials uses credentials plugin with credentials stored in configuration
 		stage('Python Stage') {
 			agent {
-			        docker {
+			        dockerContainer {
 			            image 'python:latest'
 			            label 'my-build-agent'
 			        	}
