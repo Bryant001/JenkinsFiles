@@ -1,14 +1,13 @@
 pipeline {
-    agent any
+    agent {
+	docker {
+		image 'python:latest'
+		reuseNode true
+		}
+	}
     stages {
         //withCredentials uses credentials plugin with credentials stored in configuration
 		stage('Python Stage') {
-			agent {
-				docker {
-					image 'python:latest'
-					reuseNode true
-					}
-				}
 			steps {
 				withCredentials([ usernamePassword (credentialsId: 'veracode_login', usernameVariable: 'VERACODE_API_ID', passwordVariable: 'VERACODE_API_KEY') ]) {
 					script { 
