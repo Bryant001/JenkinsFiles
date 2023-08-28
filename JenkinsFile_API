@@ -9,7 +9,7 @@ pipeline {
         stage('Test') {
             steps {
                 // Get some code from a GitHub repository
-                git branch: 'main', url: 'https://github.com/veracode/veracode-python-hmac-example.git'
+                git branch: 'master', url: 'https://github.com/veracode/veracode-python-hmac-example.git'
             }
         }
         //withCredentials uses credentials plugin with credentials stored in configuration
