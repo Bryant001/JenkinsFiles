@@ -6,7 +6,6 @@ pipeline {
 			agent {
 			        dockerContainer {
 			            image 'python:latest'
-			            label 'my-build-agent'
 			        	}
 				}
 			steps {
