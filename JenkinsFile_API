@@ -8,9 +8,9 @@ pipeline {
 					script { 
 						try {
 						sh """
-						pip install veracode_api_signing requests
-						python --version
-						python ./example.py
+						pip3 install veracode_api_signing requests
+						python3 --version
+						python3 ./example.py
 						"""
 						} catch (err) { 
 							echo 'Error code: ' + err.getMessage().substring(26)
