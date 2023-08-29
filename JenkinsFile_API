@@ -9,7 +9,9 @@ pipeline {
 						try {
 						sh """
 						pip install veracode_api_signing requests
-						http --auth-type=veracode_hmac GET "https://api.veracode.com/appsec/v1/applications/?name=JustinDemo"
+						response=$(http --auth-type=veracode_hmac GET "https://api.veracode.com/appsec/v1/applications/?name=JustinDemo")
+						reply=$(echo $response | grep -i JustinDemo | cut -d ',' -f4)
+						echo $reply
 						"""
 						} catch (err) { 
 							echo 'Error code: ' + err.getMessage().substring(26)
