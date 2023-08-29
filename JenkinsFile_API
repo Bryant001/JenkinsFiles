@@ -1,10 +1,5 @@
 pipeline {
-    agent {
-	docker {
-		image 'python:latest'
-		reuseNode true
-		}
-	}
+    agent any
     stages {
         //withCredentials uses credentials plugin with credentials stored in configuration
 		stage('Python Stage') {
