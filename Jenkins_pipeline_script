@@ -1,0 +1,59 @@
+pipeline {
+    agent any
+    stages {
+        //withCredentials uses credentials plugin with credentials stored in configuration
+		stage('Python Stage') {
+			steps {
+				withCredentials([ usernamePassword (credentialsId: 'veracode_login', usernameVariable: 'VERACODE_API_KEY_ID', passwordVariable: 'VERACODE_API_KEY_SECRET') ]) {
+					script { 
+					    echo 'Set variables for findings report'
+					    appName="JustinDemo"
+					    scanType="[\"SCA\",\"Static Analysis\",\"Dynamic Analysis\"]" //escaping quote marks as they are needed in the JSON
+					    //last_updated_start_date format YYYY-MM-DD HH:MM:SS
+					    lastStart="2023-07-12 08:54:22"
+					    //sndbxPolicy= "Policy"
+					    //rulePass="no"
+					    //status= "open"
+					    //severity="[1, 2, 3, 4, 5]"
+					    //lastEnd="2023-08-12 08:54:22"
+					    //echo "Application Name: ${appName}"
+					    //echo "Scan Types: ${scanType}"
+					    //echo "Last Start Date: ${lastStart}"
+
+						try {
+						    sh """#!/bin/bash
+						        echo "*****************Install API Signing*****************"
+						        pip install veracode_api_signing requests
+						        echo "*****************Making API call for ${appName}*****************"
+						        response=\$(http --auth-type=veracode_hmac GET "https://api.veracode.com/appsec/v1/applications/?name=${appName}")
+						        #echo "Response= \$response"
+						        echo "*****************Cutting Response to pull APP ID*****************"
+						        app_id=\$(echo \$response | cut -d ',' -f1 | cut -d ':' -f4 | cut -d ' ' -f2)
+						        echo "APP ID= \$app_id"
+						        echo "*****************Output JSON Body to File*****************"
+						        ##############################This body includes the application name and the scan type parameters.
+						        echo '{"application_id":"'\$app_id'","scan_type":${scanType},"report_type":"findings","last_updated_start_date":"${lastStart}"}' > bodyjson.json
+						        ##############################This is the minimum required payload.
+						        #echo '{"report_type":"findings","last_updated_start_date":"${lastStart}"}' > bodyjson.json
+						        echo "*****************Creating Report JSON file*****************"
+						        report=\$(http --auth-type=veracode_hmac POST https://api.veracode.com/appsec/v1/analytics/report < bodyjson.json)
+						        echo "Report Parameters= \$report"
+						        echo "*****************Cutting Report to get GUID*****************"
+						        report_id=\$(echo \$report | cut -d ',' -f1 | cut -d '"' -f6)
+						        echo "*****************Wait 20 Seconds before GET method for report*****************"
+						        sleep 20
+						        echo "*****************Output findings to file*****************"
+						        findings=\$(http --auth-type=veracode_hmac --pretty=format --format-options=json.format:true,json.indent:4 GET https://api.veracode.com/appsec/v1/analytics/report/\$report_id --output findings.json)
+						        #echo "*****************Print findings*****************"
+						        #less findings.json
+						        """
+						} catch (err) { 
+							echo 'Error code: ' + err.getMessage().substring(26)
+						}
+					echo 'end of test'
+					}
+				}
+			}
+		}
+	}
+}
