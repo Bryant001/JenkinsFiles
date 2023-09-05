@@ -56,4 +56,9 @@ pipeline {
 			}
 		}
 	}
+	post {
+		always {
+		  archiveArtifacts artifacts: 'findings.json', fingerprint: true
+		}
+	}
 }
