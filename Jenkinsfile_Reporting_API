@@ -40,8 +40,8 @@ pipeline {
 						        echo "Report Parameters= \$report"
 						        echo "*****************Cutting Report to get GUID*****************"
 						        report_id=\$(echo \$report | cut -d ',' -f1 | cut -d '"' -f6)
-						        echo "*****************Wait 30 Seconds before GET method for report*****************"
-						        sleep 30
+						        echo "*****************Wait 45 Seconds before GET method for report*****************"
+						        sleep 45
 						        echo "*****************Output findings to file*****************"
 						        findings=\$(http --auth-type=veracode_hmac --pretty=format --format-options=json.format:true,json.indent:4 GET https://api.veracode.com/appsec/v1/analytics/report/\$report_id --output findings.json)
 						        #echo "*****************Print findings*****************"
