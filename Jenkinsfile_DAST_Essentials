@@ -14,10 +14,8 @@ pipeline {
 						//Use “api.veracode.com” for US instance or “api.veracode.eu” for EU instance
 						API_ENDPOINT='api.veracode.com'
 						API_PATH='/dae/api/core-api/webhook'
-						echo '*************************before try********************************'
 						try {
-							echo "#################in try####################"
-						    sh """#!/bin/bash
+						    sh "#!/bin/bash
 							echo "Stop the script as soon as the first command fails"
 							set -euo pipefail
 							
@@ -42,7 +40,7 @@ pipeline {
 	
 							VERACODE_AUTH_HEADER=\$(generate_hmac_header \$signing_data)
 							curl -X POST -H "Authorization: \$VERACODE_AUTH_HEADER" --data "" https://\$API_ENDPOINT\$API_PATH/\$WEBHOOK
-							"""
+							"
 						} catch (err) { 
 							echo 'Error code: ' + err.getMessage().substring(26)
 						}
