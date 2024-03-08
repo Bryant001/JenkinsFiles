@@ -8,7 +8,7 @@ pipeline {
 					script { 
 					    echo 'Set variables for findings report'
 					    	WEBHOOK='8297440b-3dae-4e35-a83c-5311b97f97aa'
-						echo \$WEBHOOK
+						echo $WEBHOOK
 						API_ID='$VERACODE_API_KEY_ID'
 						API_SECRET='$VERACODE_API_KEY_SECRET'
 						//Set the API endpoint
