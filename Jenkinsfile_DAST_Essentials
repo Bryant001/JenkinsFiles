@@ -14,7 +14,7 @@ pipeline {
 						//Use “api.veracode.com” for US instance or “api.veracode.eu” for EU instance
 						API_ENDPOINT='api.veracode.com'
 						API_PATH='/dae/api/core-api/webhook'
-						echo '*************************before try********************************
+						echo '*************************before try********************************'
 						try {
 						    sh """#!/bin/bash
 							echo "Stop the script as soon as the first command fails"
