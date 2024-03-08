@@ -34,6 +34,12 @@ pipeline {
 	
 							echo "\$VERACODE_AUTH_SCHEMA id=${API_ID},ts=\$timestamp,nonce=\$nonce,sig=\$signature"
 								} 
+		
+							echo "Start Security Scan"
+							echo "Start Scan and get scan ID"
+							signing_data="id=${API_ID}&host=${API_ENDPOINT}&url=${API_PATH}/${WEBHOOK}&method=POST"
+	
+							VERACODE_AUTH_HEADER=\$(generate_hmac_header \$signing_data)
 							"""
 						} catch (err) { 
 							echo 'Error code: ' + err.getMessage().substring(26)
