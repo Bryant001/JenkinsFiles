@@ -8,8 +8,8 @@ pipeline {
 					script { 
 					    echo 'Set variables for findings report'
 					    WEBHOOK='8297440b-3dae-4e35-a83c-5311b97f97aa'
-						API_ID=VERACODE_API_KEY_ID
-						API_SECRET=VERACODE_API_KEY_SECRET
+						API_ID=${VERACODE_API_KEY_ID}
+						API_SECRET=${VERACODE_API_KEY_SECRET}
 						//Set the API endpoint
 						//Use “api.veracode.com” for US instance or “api.veracode.eu” for EU instance
 						API_ENDPOINT="api.veracode.com"
@@ -17,7 +17,7 @@ pipeline {
 
 						try {
 						    sh """#!/bin/bash
-								# Stop the script as soon as the first command fails
+								echo Stop the script as soon as the first command fails
 								set -euo pipefail
 								
 								generate_hmac_header() { 
