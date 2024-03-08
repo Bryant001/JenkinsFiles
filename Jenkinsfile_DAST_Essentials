@@ -7,7 +7,7 @@ pipeline {
 				withCredentials([ usernamePassword (credentialsId: 'veracode_login', usernameVariable: 'VERACODE_API_KEY_ID', passwordVariable: 'VERACODE_API_KEY_SECRET') ]) {
 					script { 
 					    echo 'Set variables for findings report'
-					    WEBHOOK='8297440b-3dae-4e35-a83c-5311b97f97aa'
+					    	WEBHOOK='8297440b-3dae-4e35-a83c-5311b97f97aa'
 						API_ID='$VERACODE_API_KEY_ID'
 						API_SECRET='$VERACODE_API_KEY_SECRET'
 						//Set the API endpoint
@@ -22,7 +22,7 @@ pipeline {
 							
 							echo "Start Security Scan"
 							echo "Start Scan and get scan ID"
-							signing_data="id=\${API_ID}&host=\${API_ENDPOINT}&url=\${API_PATH}/\${WEBHOOK}&method=POST"
+							signing_data="id=${API_ID}&host=${API_ENDPOINT}&url=${API_PATH}/${WEBHOOK}&method=POST"
 							"""
 						} catch (err) { 
 							echo 'Error code: ' + err.getMessage().substring(26)
