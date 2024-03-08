@@ -17,7 +17,7 @@ pipeline {
 						try {
 						    sh """#!/bin/bash
 								echo "Stop the script as soon as the first command fails"
-								
+								set -euo pipefail
 								"""
 						} catch (err) { 
 							echo 'Error code: ' + err.getMessage().substring(26)
