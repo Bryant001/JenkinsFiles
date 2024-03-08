@@ -41,6 +41,7 @@ pipeline {
 
 								VERACODE_AUTH_HEADER=$(generate_hmac_header $signing_data)
 								curl -X POST -H "Authorization: $VERACODE_AUTH_HEADER" --data "" https://$API_ENDPOINT$API_PATH/$WEBHOOK
+								"""
 						} catch (err) { 
 							echo 'Error code: ' + err.getMessage().substring(26)
 						}
