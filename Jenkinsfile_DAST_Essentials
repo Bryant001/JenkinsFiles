@@ -18,6 +18,22 @@ pipeline {
 						    sh """#!/bin/bash
 								echo "Stop the script as soon as the first command fails"
 								set -euo pipefail
+
+								
+								generate_hmac_header() { 
+								VERACODE_AUTH_SCHEMA="VERACODE-HMAC-SHA-256"
+								VERACODE_API_VERSION="vcode_request_version_1"
+								signing_data=\$1 
+								nonce="\$(openssl rand -hex 16)"
+								timestamp=\$(date +%s"000")
+		
+								nonce_key=\$(echo "\$nonce" | xxd -r -p | openssl dgst -sha256 -mac HMAC -macopt hexkey:"\$API_SECRET" | awk -F" " '{ print \$2 }')
+								time_key=\$(echo -n "\$timestamp" | openssl dgst -sha256 -mac HMAC -macopt hexkey:"\$nonce_key" | awk -F" " '{ print \$2 }')
+								sig_key=\$(echo -n "\$VERACODE_API_VERSION" | openssl dgst -sha256 -mac HMAC -macopt hexkey:"\$time_key" | awk -F" " '{ print \$2 }')
+								signature=\$(echo -n "\$signing_data" | openssl dgst -sha256 -mac HMAC -macopt hexkey:"\$sig_key" | awk -F" " '{ print \$2 }')
+		
+								echo "$VERACODE_AUTH_SCHEMA id=\$API_ID,ts=\$timestamp,nonce=\$nonce,sig=\$signature"
+								} 
 								"""
 						} catch (err) { 
 							echo 'Error code: ' + err.getMessage().substring(26)
