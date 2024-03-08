@@ -23,7 +23,7 @@ pipeline {
 						try {
 						    sh """#!/bin/bash
 						        echo "*****************Install API Signing*****************"
-						        pip install veracode_api_signing requests
+						        pip install veracode_api_signing requests --break-system-packages
 						        echo "*****************Making API call for ${appName}*****************"
 						        response=\$(http --auth-type=veracode_hmac GET "https://api.veracode.com/appsec/v1/applications/?name=${appName}")
 						        #echo "Response= \$response"
