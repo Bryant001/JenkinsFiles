@@ -10,8 +10,8 @@ pipeline {
 					    WEBHOOK='8297440b-3dae-4e35-a83c-5311b97f97aa'
 						API_ID=VERACODE_API_KEY_ID
 						API_SECRET=VERACODE_API_KEY_SECRET
-						# Set the API endpoint
-						# Use “api.veracode.com” for US instance or “api.veracode.eu” for EU instance
+						//Set the API endpoint
+						//Use “api.veracode.com” for US instance or “api.veracode.eu” for EU instance
 						API_ENDPOINT="api.veracode.com"
 						API_PATH=/dae/api/core-api/webhook
 
