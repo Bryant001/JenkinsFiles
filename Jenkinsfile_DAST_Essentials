@@ -22,7 +22,7 @@ pipeline {
 							
 							echo "Start Security Scan"
 							echo "Start Scan and get scan ID"
-							signing_data="id=\$API_ID&host=\$API_ENDPOINT&url=\$API_PATH/\$WEBHOOK&method=POST"
+							signing_data="id=\${API_ID}&host=\${API_ENDPOINT}&url=\${API_PATH}/\${WEBHOOK}&method=POST"
 							"""
 						} catch (err) { 
 							echo 'Error code: ' + err.getMessage().substring(26)
