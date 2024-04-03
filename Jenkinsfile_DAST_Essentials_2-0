@@ -15,7 +15,7 @@ pipeline {
 						API_ENDPOINT='api.veracode.com'
 						API_PATH='/dae/api/core-api/webhook'
 						try {
-						    sh """#!/bin/bash
+						    sh -x """#!/bin/bash
 								echo "*****************Install API Signing*****************"
 						        	pip install veracode_api_signing requests --break-system-packages
 
