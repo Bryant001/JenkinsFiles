@@ -20,7 +20,7 @@ pipeline {
 							echo "*****************Install API Signing*****************"
 							pip install veracode_api_signing requests --break-system-packages
 							#http -A veracode_hmac POST https://api.veracode.com/dae/api/core-api/webhook/8297440b-3dae-4e35-a83c-5311b97f97aa
-							curl -X POST -H "Authorization: \$VERACODE_AUTH_HEADER" --data "" https://api.veracode.com/dae/api/core-api/webhook/8297440b-3dae-4e35-a83c-5311b97f97aa
+							curl -X POST -H "Authorization: veracode_hmac --data "" https://api.veracode.com/dae/api/core-api/webhook/8297440b-3dae-4e35-a83c-5311b97f97aa
 							"""
 						} catch (err) { 
 							echo 'Error code: ' + err.getMessage().substring(26)
