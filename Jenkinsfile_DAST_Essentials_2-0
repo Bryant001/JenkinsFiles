@@ -19,7 +19,7 @@ pipeline {
 							set -x
 							echo "*****************Install API Signing*****************"
 							pip install veracode_api_signing requests --break-system-packages
-							HTTP_STATUS=\$(http --auth-type=veracode_hmac POST https://api.veracode.com/dae/api/core-api/webhook/'8297440b-3dae-4e35-a83c-5311b97f97aa' Accept:'application/json' | grep HTTP )
+							HTTP_STATUS=\$(http --auth-type=veracode_hmac POST https://api.veracode.com/dae/api/core-api/webhook/8297440b-3dae-4e35-a83c-5311b97f97aa | grep HTTP )
 							echo "\${HTTP_STATUS}"
 							"""
 						} catch (err) { 
