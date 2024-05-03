@@ -6,7 +6,7 @@ pipeline {
 			steps {
 				withCredentials([ usernamePassword (credentialsId: 'veracode_login', usernameVariable: 'VERACODE_API_KEY_ID', passwordVariable: 'VERACODE_API_KEY_SECRET') ]) {
 					script { 
-					    echo 'Set variables'
+					    echo '*****************Set variables*****************'
 					    WEBHOOK='8297440b-3dae-4e35-a83c-5311b97f97aa'
 					    API_ID='$VERACODE_API_KEY_ID'
 					    API_SECRET='$VERACODE_API_KEY_SECRET'
