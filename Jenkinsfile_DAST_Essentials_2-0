@@ -24,7 +24,7 @@ pipeline {
 						} catch (err) { 
 							echo 'Error code: ' + err.getMessage().substring(26)
 						}
-					echo "end of script"
+					echo "*****************End of script*****************"
 					}
 				}
 			}
