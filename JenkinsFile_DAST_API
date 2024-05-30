@@ -10,6 +10,7 @@ pipeline {
 						try {
 						sh """
 						set -x
+						echo "*****************Install API Signing*****************"
 						pip install veracode_api_signing requests
 						echo "************HTTP method *****************"
 						analysisID=\$(http --auth-type=veracode_hmac get "https://api.veracode.com/was/configservice/v1/analyses?name=${name}")
