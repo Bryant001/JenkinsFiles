@@ -6,11 +6,14 @@ pipeline {
 			steps {
 				withCredentials([ usernamePassword (credentialsId: 'veracode_login', usernameVariable: 'VERACODE_API_KEY_ID', passwordVariable: 'VERACODE_API_KEY_SECRET') ]) {
 					script { 
+						name="Postman_DAST_NodeGoat_v2"
 						try {
 						sh """
 						pip install veracode_api_signing requests
-						response=$(http --auth-type=veracode_hmac GET "https://api.veracode.com/appsec/v1/applications/?name=JustinDemo")
-						echo $response
+						analysisID==$(http --auth-type=veracode_hmac get "https://api.veracode.com/was/configservice/v1/analyses?name=${name}")
+						echo "Scan info: \$analysisID"
+						#response=$(http --auth-type=veracode_hmac put "https://api.veracode.com/was/configservice/v1/analyses/3c06f2735ee51041f997a5f43ead0191?method=PATCH")
+						#echo $response
 						#reply=(echo $response | grep -i JustinDemo | cut -d ',' -f4)
 						#echo $reply
 						"""
