@@ -11,6 +11,7 @@ pipeline {
 						sh """
 						set -x
 						pip install veracode_api_signing requests
+						echo "************HTTP method *****************"
 						analysisID=\$(http --auth-type=veracode_hmac get "https://api.veracode.com/was/configservice/v1/analyses?name=${name}")
 						echo "Scan info: ${analysisID}"
 						#response=\$(http --auth-type=veracode_hmac put "https://api.veracode.com/was/configservice/v1/analyses/3c06f2735ee51041f997a5f43ead0191?method=PATCH")
