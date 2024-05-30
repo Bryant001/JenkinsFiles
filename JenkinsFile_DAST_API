@@ -6,7 +6,7 @@ pipeline {
 			steps {
 				withCredentials([ usernamePassword (credentialsId: 'veracode_login', usernameVariable: 'VERACODE_API_KEY_ID', passwordVariable: 'VERACODE_API_KEY_SECRET') ]) {
 					script { 
-						echo "*************Set variable name*************
+						echo "*************Set variable name*************"
 						name="Postman_DAST_NodeGoat_v2"
 						try {
 							sh """#!/bin/bash
