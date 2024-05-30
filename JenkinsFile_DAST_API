@@ -16,6 +16,7 @@ pipeline {
 							pip install veracode_api_signing requests --break-system-packages
 							echo "************HTTP method *****************"
 							analysisID=\$(http --auth-type=veracode_hmac get "https://api.veracode.com/was/configservice/v1/analyses?name=${name}")
+							echo "Scan info: ${analysisID}"
 							"""
 						} catch (err) { 
 							echo 'Error code: ' + err.getMessage().substring(26)
