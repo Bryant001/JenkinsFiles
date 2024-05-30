@@ -9,6 +9,7 @@ pipeline {
 						name="Postman_DAST_NodeGoat_v2"
 						try {
 						sh """
+						set -x
 						pip install veracode_api_signing requests
 						analysisID==$(http --auth-type=veracode_hmac get "https://api.veracode.com/was/configservice/v1/analyses?name=${name}")
 						echo "Scan info: \$analysisID"
