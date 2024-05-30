@@ -8,7 +8,7 @@ pipeline {
 					script { 
 						name="Postman_DAST_NodeGoat_v2"
 						try {
-						sh """
+						sh """#!/bin/bash
 						set -x
 						echo "*****************Install API Signing*****************"
 						pip install veracode_api_signing requests
