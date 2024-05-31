@@ -12,6 +12,7 @@ pipeline {
 						echo "Name: ${name}"
 						try {
 							sh """
+							echo "Duration: \$duration !!!!!!!!!!!!!!!!!!!"
 							echo "*****************Install API Signing*****************"
 							pip install veracode_api_signing requests --break-system-packages
 							echo "************HTTP method *****************"
@@ -25,7 +26,7 @@ pipeline {
 							"schedule": {
 								"now": "true",
 								"duration": {
-								"length": \$duration,
+								"length": '\$duration',
 								"unit": "DAY"
 									}
 								}
