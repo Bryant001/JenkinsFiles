@@ -9,10 +9,8 @@ pipeline {
 						echo "*************Set variable name*************"
 						name="Postman_DAST_NodeGoat_v2"
 						duration="1"
-						echo "Name: ${name}"
 						try {
 							sh """
-							echo "Duration: ${duration} !!!!!!!!!!!!!!!!!!!"
 							echo "*****************Install API Signing*****************"
 							pip install veracode_api_signing requests --break-system-packages
 							echo "************HTTP method *****************"
@@ -20,18 +18,8 @@ pipeline {
 							echo "***********Parse JSON******************"
 							analysisID=\$(echo "\$scanInfo" | python -c "import sys, json; print(json.load(sys.stdin)['_embedded']['analyses'][0]['analysis_id'])")
 							echo "Analysis ID: \$analysisID"
-							echo
-							'{
-							"name": "${name}",
-							"schedule": {
-								"now": "true",
-								"duration": {
-								"length": ${duration},
-								"unit": "DAY"
-									}
-								}
-							}' > input.json
-							http --auth-type veracode_hmac PUT "https://api.veracode.com/was/configservice/v1/analyses/\$analysisID?method=PATCH" @input.json
+							echo '{"name": "${name}","schedule":{"now": "true","duration": {"length": ${duration},"unit": "DAY"}}}' > input.json
+							http --auth-type veracode_hmac PUT "https://api.veracode.com/was/configservice/v1/analyses/\$analysisID?method=PATCH" < input.json
 							"""
 						} catch (err) { 
 							echo 'Error code: ' + err.getMessage().substring(26)
