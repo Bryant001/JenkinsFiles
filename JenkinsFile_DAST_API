@@ -25,7 +25,7 @@ pipeline {
 							"schedule": {
 								"now": "true",
 								"duration": {
-								"length": '\$duration',
+								"length": \$duration,
 								"unit": "DAY"
 									}
 								}
