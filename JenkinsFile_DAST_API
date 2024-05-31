@@ -8,7 +8,7 @@ pipeline {
 					script { 
 						echo "*************Set variable name*************"
 						name="Postman_DAST_NodeGoat_v2"
-						duration=1
+						duration="1"
 						echo "Name: ${name}"
 						try {
 							sh """
