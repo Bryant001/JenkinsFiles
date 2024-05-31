@@ -11,6 +11,7 @@ pipeline {
 						echo "Name: ${name}"
 						try {
 							sh """#!/bin/bash
+							echo "******************Set -x********************"
 							set -x
 							echo "*****************Install API Signing*****************"
 							pip install veracode_api_signing requests --break-system-packages
