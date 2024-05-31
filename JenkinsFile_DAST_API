@@ -16,7 +16,7 @@ pipeline {
 							echo "************HTTP method *****************"
 							scanInfo=\$(http --auth-type=veracode_hmac GET "https://api.veracode.com/was/configservice/v1/analyses?name=${name}")
 							echo "************Read JSON *****************"
-							jsonData=\$(readJSON(text: \$scanInfo))
+							jsonData=\$(readJSON text: \$scanInfo)
 							echo "***********Parse JSON******************"
 							analysisID=\$(\$jsonData[_embedded.analyses[0].analysis_id])
 							echo "Analysis ID: \$analysisID"
