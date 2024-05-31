@@ -14,9 +14,9 @@ pipeline {
 							echo "*****************Install API Signing*****************"
 							pip install veracode_api_signing requests --break-system-packages
 							echo "************HTTP method *****************"
-							scanInfo=\$(http --auth-type=veracode_hmac GET "https://api.veracode.com/was/configservice/v1/analyses?name=${name}")
+							scanInfo=\$(http --auth-type=veracode_hmac GET "https://api.veracode.com/was/configservice/v1/analyses?name=${name}", returnStdout: true)
 							echo "************Read JSON *****************"
-							jsonData=\$(readJSON(\${scanInfo}))
+							jsonData=\$(readJSON(text: \$scanInfo))
 							echo "***********Parse JSON******************"
 							analysisID=\$(\$jsonData[_embedded.analyses[0].analysis_id])
 							echo "Analysis ID: \$analysisID"
