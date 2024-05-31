@@ -21,11 +21,11 @@ pipeline {
 							echo "Analysis ID: \$analysisID"
 							echo
 							'{
-							"name": "'\$name'",
+							"name": "${name}",
 							"schedule": {
 								"now": "true",
 								"duration": {
-								"length": '\$duration',
+								"length": \$duration,
 								"unit": "DAY"
 									}
 								}
