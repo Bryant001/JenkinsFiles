@@ -16,7 +16,7 @@ pipeline {
 							echo "************HTTP method *****************"
 							scanInfo=\$(http --auth-type=veracode_hmac GET "https://api.veracode.com/was/configservice/v1/analyses?name=${name}")
 							echo "***********Parse JSON******************"
-							analysisID=\$(echo "\$scanInfo" | python -c "import sys, json; print(json.load(sys.stdin)['._embedded']['analyses'][0]['analysis_id'])")
+							analysisID=\$(echo "\$scanInfo" | python -c "import sys, json; print(json.load(sys.stdin)['_embedded']['analyses'][0]['analysis_id'])")
 							echo "Analysis ID: \$analysisID"
 							"""
 						} catch (err) { 
