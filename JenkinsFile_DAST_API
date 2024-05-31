@@ -19,9 +19,9 @@ pipeline {
 							echo "***********Parse JSON******************"
 							analysisID=\$(echo "\$scanInfo" | python -c "import sys, json; print(json.load(sys.stdin)['_embedded']['analyses'][0]['analysis_id'])")
 							echo "Analysis ID: \$analysisID"
-							echo """
-							{
-							\"name\": \${name}\,
+							echo
+							"{
+							\"name\": \"\$name\",
 							\"schedule\": {
 								\"now\": \"true\",
 								\"duration\": {
@@ -29,7 +29,7 @@ pipeline {
 								\"unit\": \"DAY\"
 									}
 								}
-							}""" > input.json
+							}" > input.json
 							http --auth-type veracode_hmac PUT "https://api.veracode.com/was/configservice/v1/analyses/\$analysisID?method=PATCH" @input.json
 							"""
 						} catch (err) { 
