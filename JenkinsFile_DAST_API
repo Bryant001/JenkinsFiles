@@ -8,9 +8,9 @@ pipeline {
 					script { 
 						echo "*************Set variables*************"
 						//name variable is the name of the DAST scan you would like to initiate - should match name found on Veracode platform
-						name="Name of your DAST scan here"
+						name="Postman_DAST_NodeGoat_v2"
 						//duration is the length of time in days you will allow the DAST scan to run - integer value 0 to 25
-						duration="integer value of 0 to 25 days"
+						duration="1"
 						try {
 							sh """
 							echo "*****************Install API Signing*****************"
