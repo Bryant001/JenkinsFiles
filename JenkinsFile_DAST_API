@@ -16,8 +16,8 @@ pipeline {
 							echo "************HTTP method *****************"
 							scanInfo=\$(http --auth-type=veracode_hmac GET "https://api.veracode.com/was/configservice/v1/analyses?name=${name}")
 							echo "************Grep JSON *****************"
-							analysisID=\$(echo \${scanInfo} | grep -o '\"analysis_id\": \"[^\"]*' | grep -o '[^"]*')
-							echo "Analysis ID: \${analysisID}"
+							analysisID=\$(echo \${scanInfo} | grep -o '"analysis_id": "[^"]*' | grep -o '[^"]*\$')
+							echo "Analysis ID: \$analysisID"
 							"""
 						} catch (err) { 
 							echo 'Error code: ' + err.getMessage().substring(26)
